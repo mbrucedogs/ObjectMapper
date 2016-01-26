@@ -16,9 +16,11 @@ public class MappableManagedObject: NSManagedObject, Mappable{
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
-    public required init?(_ map: Map, context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entityForName(NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!, inManagedObjectContext: context)
-        super.init(entity: entity!, insertIntoManagedObjectContext: context)
+    public required init?(_ map: Map) {
+		let ctx = map.context
+		let cname = NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
+        let entity = NSEntityDescription.entityForName(cname, inManagedObjectContext: ctx)
+        super.init(entity: entity!, insertIntoManagedObjectContext: ctx)
         map.context = context
     }
     

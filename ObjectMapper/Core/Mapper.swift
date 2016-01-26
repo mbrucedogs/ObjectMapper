@@ -114,7 +114,7 @@ public final class Mapper<N: Mappable> {
 			}
 		}
 		
-		if var object = N(map, context: self.context) {
+		if var object = N(map) {
 			object.mapping(map)
 			return object
 		}

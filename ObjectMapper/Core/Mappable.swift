@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 public protocol Mappable {
-	init?(_ map: Map, context: NSManagedObjectContext)
+	init?(_ map: Map)
 	var context: NSManagedObjectContext { get }
 	mutating func mapping(map: Map)
 }
