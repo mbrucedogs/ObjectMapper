@@ -13,6 +13,7 @@
 		3BAD2C0E1BDDB10D00E6B203 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAD2C0B1BDDB10D00E6B203 /* Mappable.swift */; };
 		3BAD2C101BDDC0B000E6B203 /* MappableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAD2C0F1BDDC0B000E6B203 /* MappableExtensionsTests.swift */; };
 		3BAD2C111BDDC0B000E6B203 /* MappableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAD2C0F1BDDC0B000E6B203 /* MappableExtensionsTests.swift */; };
+		40595BFA1C56B01E00513BF8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40595BF91C56B01E00513BF8 /* CoreData.framework */; };
 		6100B1C01BD76A030011114A /* NestedArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6100B1BF1BD76A020011114A /* NestedArrayTests.swift */; };
 		6A05B7B01BE274BE00F19B53 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A05B7A61BE274BE00F19B53 /* ObjectMapper.framework */; };
 		6A05B7BD1BE274E800F19B53 /* ObjectMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AAC8F7B19F03C2900E7A677 /* ObjectMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -162,6 +163,7 @@
 		37AFD9B81AAD191C00AB59B5 /* CustomDateFormatTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDateFormatTransform.swift; sourceTree = "<group>"; };
 		3BAD2C0B1BDDB10D00E6B203 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
 		3BAD2C0F1BDDC0B000E6B203 /* MappableExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableExtensionsTests.swift; sourceTree = "<group>"; };
+		40595BF91C56B01E00513BF8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6100B1BF1BD76A020011114A /* NestedArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedArrayTests.swift; sourceTree = "<group>"; };
 		6A05B7A61BE274BE00F19B53 /* ObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A05B7AF1BE274BE00F19B53 /* ObjectMapper-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ObjectMapper-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40595BFA1C56B01E00513BF8 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +271,7 @@
 		6AAC8F6C19F03C2900E7A677 = {
 			isa = PBXGroup;
 			children = (
+				40595BF91C56B01E00513BF8 /* CoreData.framework */,
 				6A9EEBD41AC5BFA30011F22C /* README.md */,
 				6AAC8F7819F03C2900E7A677 /* ObjectMapper */,
 				6AAC8F8219F03C2900E7A677 /* ObjectMapperTests */,

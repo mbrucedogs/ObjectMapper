@@ -27,6 +27,7 @@
 //  THE SOFTWARE.
 
 import Foundation
+import CoreData
 
 public enum MappingType {
 	case FromJSON
@@ -35,8 +36,10 @@ public enum MappingType {
 
 /// The Mapper class provides methods for converting Model objects to JSON and methods for converting JSON to Model objects
 public final class Mapper<N: Mappable> {
-	
-	public init(){}
+	public var context: NSManagedObjectContext
+	public init(context: NSManagedObjectContext){
+		self.context = context
+	}
 	
 	// MARK: Mapping functions that map to an existing object toObject
 	
@@ -60,7 +63,7 @@ public final class Mapper<N: Mappable> {
 	/// Maps a JSON dictionary to an existing object that conforms to Mappable.
 	/// Usefull for those pesky objects that have crappy designated initializers like NSManagedObject
 	public func map(JSONDictionary: [String : AnyObject], var toObject object: N) -> N {
-		let map = Map(mappingType: .FromJSON, JSONDictionary: JSONDictionary, toObject: true)
+		let map = Map(context: self.context, mappingType: .FromJSON, JSONDictionary: JSONDictionary, toObject: true)
 		object.mapping(map)
 		return object
 	}
@@ -101,7 +104,7 @@ public final class Mapper<N: Mappable> {
 
 	/// Maps a JSON dictionary to an object that conforms to Mappable
 	public func map(JSONDictionary: [String : AnyObject]) -> N? {
-		let map = Map(mappingType: .FromJSON, JSONDictionary: JSONDictionary)
+		let map = Map(context: self.context, mappingType: .FromJSON, JSONDictionary: JSONDictionary)
 		
 		// check if N is of type MappableCluster
 		if let klass = N.self as? MappableCluster.Type {
@@ -111,7 +114,7 @@ public final class Mapper<N: Mappable> {
 			}
 		}
 		
-		if var object = N(map) {
+		if var object = N(map, context: self.context) {
 			object.mapping(map)
 			return object
 		}
@@ -201,9 +204,9 @@ public final class Mapper<N: Mappable> {
     public func mapDictionary(JSONDictionary: [String : [String : AnyObject]], var toDictionary dictionary: [String : N]) -> [String : N] {
         for (key, value) in JSONDictionary {
             if let object = dictionary[key] {
-                Mapper().map(value, toObject: object)
+                Mapper(context: self.context).map(value, toObject: object)
             } else {
-                dictionary[key] = Mapper().map(value)
+                dictionary[key] = Mapper(context: self.context).map(value)
             }
         }
         
@@ -292,7 +295,7 @@ extension Mapper {
 	
 	///Maps an object that conforms to Mappable to a JSON dictionary <String : AnyObject>
 	public func toJSON(var object: N) -> [String : AnyObject] {
-		let map = Map(mappingType: .ToJSON, JSONDictionary: [:])
+		let map = Map(context: self.context, mappingType: .ToJSON, JSONDictionary: [:])
 		object.mapping(map)
 		return map.JSONDictionary
 	}
