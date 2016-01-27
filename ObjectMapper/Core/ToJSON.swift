@@ -100,7 +100,11 @@ internal final class ToJSON {
 	}
 
 	class func object<N: Mappable>(field: N, map: Map) {
-		setValue(Mapper(context: map.context).toJSON(field), map: map)
+		if let c = map.context {
+			setValue(Mapper(context: c).toJSON(field), map: map)
+		} else {
+			setValue(Mapper().toJSON(field), map: map)
+		}
 	}
 	
 	class func optionalObject<N: Mappable>(field: N?, map: Map) {
@@ -110,8 +114,12 @@ internal final class ToJSON {
 	}
 
 	class func objectArray<N: Mappable>(field: Array<N>, map: Map) {
-		let JSONObjects = Mapper(context: map.context).toJSONArray(field)
-		
+		let JSONObjects: [[String : AnyObject]]
+		if let c = map.context {
+			JSONObjects = Mapper(context: c).toJSONArray(field)
+		} else {
+			JSONObjects = Mapper().toJSONArray(field)
+		}
 		setValue(JSONObjects, map: map)
 	}
 	
@@ -124,7 +132,12 @@ internal final class ToJSON {
 	class func twoDimensionalObjectArray<N: Mappable>(field: Array<Array<N>>, map: Map) {
 		var array = [[[String : AnyObject]]]()
 		for innerArray in field {
-			let JSONObjects = Mapper(context: map.context).toJSONArray(innerArray)
+			let JSONObjects: [[String : AnyObject]]
+			if let c = map.context {
+				JSONObjects = Mapper(context: c).toJSONArray(innerArray)
+			} else {
+				JSONObjects = Mapper().toJSONArray(innerArray)
+			}
 			array.append(JSONObjects)
 		}
 		setValue(array, map: map)
@@ -137,8 +150,12 @@ internal final class ToJSON {
 	}
 	
 	class func objectSet<N: Mappable where N: Hashable>(field: Set<N>, map: Map) {
-		let JSONObjects = Mapper(context: map.context).toJSONSet(field)
-		
+		let JSONObjects: [[String : AnyObject]]
+		if let c = map.context {
+			JSONObjects = Mapper(context: c).toJSONSet(field)
+		} else {
+			JSONObjects = Mapper().toJSONSet(field)
+		}
 		setValue(JSONObjects, map: map)
 	}
 	
@@ -149,8 +166,12 @@ internal final class ToJSON {
 	}
 	
 	class func objectDictionary<N: Mappable>(field: Dictionary<String, N>, map: Map) {
-		let JSONObjects = Mapper(context: map.context).toJSONDictionary(field)
-		
+		let JSONObjects: [String : [String : AnyObject]]
+		if let c = map.context {
+			JSONObjects = Mapper(context: c).toJSONDictionary(field)
+		} else {
+			JSONObjects = Mapper().toJSONDictionary(field)
+		}
 		setValue(JSONObjects, map: map)
 	}
 	
@@ -161,7 +182,12 @@ internal final class ToJSON {
     }
 	
 	class func objectDictionaryOfArrays<N: Mappable>(field: Dictionary<String, [N]>, map: Map) {
-		let JSONObjects = Mapper(context: map.context).toJSONDictionaryOfArrays(field)
+		let JSONObjects: [String : [[String : AnyObject]]]
+		if let c = map.context {
+			JSONObjects = Mapper(context: c).toJSONDictionaryOfArrays(field)
+		} else {
+			JSONObjects = Mapper().toJSONDictionaryOfArrays(field)
+		}
 
 		setValue(JSONObjects, map: map)
 	}
