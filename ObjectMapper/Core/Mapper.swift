@@ -36,8 +36,9 @@ public enum MappingType {
 
 /// The Mapper class provides methods for converting Model objects to JSON and methods for converting JSON to Model objects
 public final class Mapper<N: Mappable> {
-	public var context: NSManagedObjectContext
-	public init(context: NSManagedObjectContext){
+	public var context: NSManagedObjectContext?
+	public init(){}
+	public init(context: NSManagedObjectContext?){
 		self.context = context
 	}
 	
